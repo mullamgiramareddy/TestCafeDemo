@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 fixture('Login MAWM')
 .page('https://fsgis.sce.manh.com/udc/dm/facility-console');
 
-const num =56;
+const num =55;
 test("LPN Level Asn Creation ", async (t) => {
   //Item creation
    const itemId = await createItem(t);
