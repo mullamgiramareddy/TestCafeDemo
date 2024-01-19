@@ -5,7 +5,7 @@ fixture('Login MAWM')
 const args =minimist(process.argv.slice(2));
 const num =args.dynamicNum;
 test("LPN Level Asn Creation ", async (t) => {
-
+  console.log("Test LPN Level Asn Creation Started");
   //Item creation
    const itemId = await createItem(t);
    console.log("ItemId "+itemId);  
@@ -24,7 +24,7 @@ test("LPN Level Asn Creation ", async (t) => {
     const lpn =asnResponse[1];
     console.log("ASN "+asn);
     console.log("LPN "+lpn);
-  
+    console.log("Test LPN Level Asn Creation Started");
   });
 
 
