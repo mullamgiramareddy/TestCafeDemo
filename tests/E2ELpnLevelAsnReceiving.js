@@ -4,9 +4,9 @@ fixture('Login MAWM')
 .page('https://fsgis.sce.manh.com/udc/dm/facility-console');
 
 const args =minimist(process.argv.slice(2));
-const num =args.env;
-
+const num =args.dynamicNum;
 test('1 Receiving', async t => {
+
     console.log("Test Receiving Started");
     await t.typeText(Selector('#login-username'), 'macysdev-adminuser') 
     .pressKey('enter')
@@ -25,6 +25,7 @@ test('1 Receiving', async t => {
 
 
 test('2 Sorting Test', async t => {
+
     console.log("Test Sorting Started");
     await t.typeText(Selector('#login-username'), 'macysdev-adminuser') 
     .pressKey('enter')
@@ -43,6 +44,7 @@ test('2 Sorting Test', async t => {
 
 
 test('3 Putaway Test', async t => {
+
     console.log("Test Putaway Started");
     await t.typeText(Selector('#login-username'), 'macysdev-adminuser') 
     .pressKey('enter')
