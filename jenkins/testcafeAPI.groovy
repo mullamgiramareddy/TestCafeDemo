@@ -14,9 +14,9 @@ pipeline{
         stage('Test'){           
              steps{
                 script{
-                    bat 'npx testcafe chrome tests\\E2ELpnLevelAsnReceiving.js --disable-native-automation'
+                    bat 'npx testcafe chrome:headless api\\LpnLevelAsnCreation.js --disable-native-automation'
                 }
-            }
+            }      
         }
     }
 }
