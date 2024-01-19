@@ -5,8 +5,8 @@ fixture('Login MAWM')
 const args =minimist(process.argv.slice(2));
 const num =args.dynamicNum;
 const authorization = 'Bearer '.concat('eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyT3JncyI6WyI2MjMwRCJdLCJ1c2VyX25hbWUiOiJwb3J0bGFuZGRldi1hZG1pbnVzZXIiLCJ1c2VyTG9jYXRpb25zIjpbeyJsb2NhdGlvbklkIjoiNjIzMEQiLCJsb2NhdGlvblR5cGUiOiJkdW1teSJ9XSwibG9jYWxlIjoiZW4iLCJleGNsdWRlZFVzZXJCdXNpbmVzc1VuaXRzIjpbXSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9hZG1pbkA2MjMwRCJdLCJjbGllbnRfaWQiOiJvbW5pY29tcG9uZW50LjEuMC4wIiwidXNlclRpbWVab25lIjpudWxsLCJlZGdlIjowLCJzY29wZSI6WyJvbW5pIiwiY29tcG9uZW50Il0sIm9yZ2FuaXphdGlvbiI6IjYyMzBEIiwiYWNjZXNzdG9BbGxCVXMiOmZhbHNlLCJ0ZW5hbnRJZCI6ImZzZ2lzc2YxMW8iLCJleHAiOjE3MDU2OTg0NDYsInVzZXJEZWZhdWx0cyI6W10sImp0aSI6IjdkYmUzZjE0LWJhZDQtNDZlNC04NmU5LTAyYjA5Y2YyZDRmNSIsInVzZXJCdXNpbmVzc1VuaXRzIjpbXX0.Gwg-pVIhKBgUQLiFey7UBHpWCeguE08UhjYnJ0rRdeqOASpQIpPoGM0R0b_lrHXOtaxM_uPPRu1QR_1k8iIqO_nIklxtNu9uBrOlgjQdZfxEIiWf3VPixxLqu5bAlZ4HQTOP5yowTliaTHIV8A1SfPWwRnqNFqnNfWUvwT_pREoamGDDh2Iujk_mHFjGrid2-bgQm-xlSGcVtCjMfEtxNcIAfFnx4Fzh1Km-P6-pBUTe8ApT6KKb-vsPn-FAJKN3F2nkkB0fZ06Q0E7567Rk5czxh1J0wqhlCcWf8t-KCWFrwzKxwb5KR7C7dNCpor36jTYWZ32Aa1jDF7GHfC9c4w');
-test("LPN Level Asn Creation ", async (t) => {
-  console.log("Test LPN Level Asn Creation Started");
+test("Item Level Asn Creation ", async (t) => {
+  console.log("Test Item Level Asn Creation Started");
   //Item creation
    const itemId = await createItem(t);
    console.log("ItemId "+itemId);  
@@ -19,13 +19,10 @@ test("LPN Level Asn Creation ", async (t) => {
    console.log("PurchaseOrderLineId "+pol);  
 
     //Asn creation
-    // const asnResponse =  await lpnLevelASNCreation(t, "AutoTestItem70", "AutoTestPO70", "PL870");
-    const asnResponse =  await lpnLevelASNCreation(t, itemId, po, pol);
+    const asnResponse =  await itemLevelASNCreation(t, itemId, po, pol);
     const asn =asnResponse[0];
-    const lpn =asnResponse[1];
     console.log("ASN "+asn);
-    console.log("LPN "+lpn);
-    console.log("Test LPN Level Asn Creation Ended");
+    console.log("Test Item Level Asn Creation Ended");
   });
 
 
@@ -37,7 +34,7 @@ test("LPN Level Asn Creation ", async (t) => {
         method: "post",
         headers: {
           selectedLocation: '6230D',
-          selectedOrganization:'6230D',         
+          selectedOrganization:'6230D',
           Authorization: authorization,
         },
         body: { 
@@ -45,7 +42,8 @@ test("LPN Level Asn Creation ", async (t) => {
           "ShortDescription": "AutoTestItem"+num,
           "PrimaryBarCode": "AutoTestItem"+num,
           "Description": "AutoTestItem"+num+"description",         
-          "ProdLine": "BTY",           
+          "ProdLine": "BTY"
+           
           } ,
       });
        await t.expect(response.status).eql(200);
@@ -128,9 +126,9 @@ test("LPN Level Asn Creation ", async (t) => {
       return [response.body.data.PurchaseOrderId,"PL8"+num];
       }
 
-      async function lpnLevelASNCreation(t, itemId, poId, polId){
+      async function itemLevelASNCreation(t, itemId, poId, polId){
         console.log("                                        ");
-        console.log("---- Creating lpnLevelASNCreation -----");
+        console.log("---- Creating ItemLevelASNCreation -----");
         console.log("--------  ItemId: "+itemId+" ----------");
         console.log("--------  poId: "+poId+" --------------");
         console.log("--------  polId: "+polId+" ------------");
@@ -144,30 +142,27 @@ test("LPN Level Asn Creation ", async (t) => {
               Authorization: authorization,
             },
             body: { 
-              "AsnId": "AutoASN"+num,
-              "AsnOriginTypeId": "P",
-              "AsnLevelId": "LPN",
-              "VendorId": "800",
+              "AsnId": "AutoASN"+num, //unique
+              "AsnOriginTypeId": "W",
               "DestinationFacilityId": "6230D",
-              "Lpn": [
-                   {
-                      "AllocationTypeId": null,
-                      "LpnId": "9800001000887aAuto"+num,
-                      "LpnTypeId": "ILPN",
-                      "LpnDetail": [
-                          {
-                              "PurchaseOrderId": poId,
-                              "PurchaseOrderLineId": polId,
-                              "QuantityUomId": "UNIT",
-                              "ItemId": itemId,
-                              "ShippedQuantity": 10
-                          }
-                      ]
-                  }  
-              ]
-              } ,
+              "EstimatedDeliveryDate": "2024-03-10",
+              "VendorId": "",
+              "AsnLine": [
+                  {
+                      "Canceled": false,
+                      "ItemId": itemId,
+                      "PurchaseOrderId": "",
+                      "PurchaseOrderLineId": "",
+                      "QuantityUomId": "UNIT",
+                      "ShippedQuantity": 5.0
+                  }
+              ],
+              "Extended": {
+                  "Example1": "null"
+              }
+            } ,
           });
            await t.expect(response.status).eql(200);
-          return [response.body.data.AsnId, "9800001000887aAuto"+num];
+          return [response.body.data.AsnId];
         }
     
