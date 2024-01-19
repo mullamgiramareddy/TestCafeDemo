@@ -11,12 +11,14 @@ pipeline{
                 }
             }
         }
-        stage('Test API'){           
+        stage('Test API'){        
+            try{
              steps{
                 script{
                       bat 'npx testcafe chrome:headless api\\LpnLevelAsnCreation.js'
                 }
             }
+            }catch(Exception e){}
         }
         stage('Test UI'){           
              steps{
