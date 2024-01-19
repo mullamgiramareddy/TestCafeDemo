@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 fixture('Login MAWM')
 .page('https://fsgis.sce.manh.com/udc/dm/facility-console');
 
-const num =48;
+const num =47;
 test('1 Receiving', async t => {
     await t.typeText(Selector('#login-username'), 'macysdev-adminuser') 
     .pressKey('enter')
@@ -19,7 +19,7 @@ test('1 Receiving', async t => {
 });
 
 
-test('2 Beauty Test', async t => {
+test('2 Sorting Test', async t => {
     await t.typeText(Selector('#login-username'), 'macysdev-adminuser') 
     .pressKey('enter')
     .typeText(Selector('#login-password'), 'L1Admin2024$')
