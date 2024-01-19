@@ -14,7 +14,7 @@ pipeline{
         stage('Test'){
             steps{
                 script{
-                    bat 'npx testcafe chrome tests\E2ELpnLevelAsnReceiving.js --DEV-dev --disable-native-automation'
+                    bat 'npx testcafe chrome tests\\E2ELpnLevelAsnReceiving.js --DEV-dev --disable-native-automation'
                 }
             }
         }
