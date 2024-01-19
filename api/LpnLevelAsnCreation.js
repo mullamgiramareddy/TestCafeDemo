@@ -1,8 +1,10 @@
 import { Selector } from "testcafe";
+import minimist from 'minimist'
 fixture('Login MAWM')
 .page('https://fsgis.sce.manh.com/udc/dm/facility-console');
-
-const num =45;
+const args =minimist(process.argv.slice(2));
+const num =args.dynamicNum;
+// const num =45;
 test("LPN Level Asn Creation ", async (t) => {
 
   try{

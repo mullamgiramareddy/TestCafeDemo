@@ -3,6 +3,9 @@ pipeline{
     tools{
         nodejs 'NodeJS'
     }
+    parameters{
+        string(name: 'dynamicNum', defaultValue: '1')
+    }
     stages{
         stage('Install npm dependencies'){
             steps{
@@ -14,7 +17,10 @@ pipeline{
         stage('Test'){           
              steps{
                 script{
-                    bat 'npx testcafe chrome:headless api\\LpnLevelAsnCreation.js'
+                        def selectedDynamicValue = params.dynamicNum
+                        echo "Selected DynamicValue: ${selectedDynamicValue}"
+
+                    bat "npx testcafe chrome:headless --dynamicNum ${selectedDynamicValue} api\\LpnLevelAsnCreation.js"
                 }
             }      
         }
