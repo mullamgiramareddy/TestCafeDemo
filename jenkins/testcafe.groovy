@@ -11,12 +11,14 @@ pipeline{
                 }
             }
         }
-        stage('Test'){           
+        stage('Test API'){           
              steps{
                 script{
                     bat 'npx testcafe chrome:headless api\\LpnLevelAsnCreation.js '
                 }
-            }
+            }      
+        }
+        stage('Test Ui'){           
              steps{
                 script{
                     bat 'npx testcafe chrome tests\\E2ELpnLevelAsnReceiving.js --disable-native-automation'
