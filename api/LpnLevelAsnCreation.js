@@ -25,7 +25,7 @@ test("LPN Level Asn Creation ", async (t) => {
     console.log("ASN "+asn);
     console.log("LPN "+lpn);
 
-  }catch{}
+  }catch(error){}
   
   });
 
