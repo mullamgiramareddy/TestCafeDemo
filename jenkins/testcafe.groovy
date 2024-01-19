@@ -11,6 +11,13 @@ pipeline{
                 }
             }
         }
+        stage('Test API'){           
+             steps{
+                script{
+                      bat 'npx testcafe chrome:headless api\\LpnLevelAsnCreation.js'
+                }
+            }
+        }
         stage('Test UI'){           
              steps{
                 script{
@@ -19,12 +26,5 @@ pipeline{
             }
         }
 
-         stage('Test API'){           
-             steps{
-                script{
-                      bat 'npx testcafe chrome:headless api\\LpnLevelAsnCreation.js'
-                }
-            }
-        }
     }
 }

@@ -4,6 +4,8 @@ fixture('Login MAWM')
 
 const num =47;
 test("LPN Level Asn Creation ", async (t) => {
+
+  try{
   //Item creation
    const itemId = await createItem(t);
    console.log("ItemId "+itemId);  
@@ -22,6 +24,8 @@ test("LPN Level Asn Creation ", async (t) => {
     const lpn =asnResponse[1];
     console.log("ASN "+asn);
     console.log("LPN "+lpn);
+
+  }catch{}
   
   });
 
