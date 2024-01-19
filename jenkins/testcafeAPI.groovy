@@ -4,7 +4,7 @@ pipeline{
         nodejs 'NodeJS'
     }
     parameters{
-        string(name: 'dynamicNum', defaultValue: '1')
+        string(name: 'dynamicNum', defaultValue: 'Enter Dynamic Value')
     }
     stages{
         stage('Install npm dependencies'){

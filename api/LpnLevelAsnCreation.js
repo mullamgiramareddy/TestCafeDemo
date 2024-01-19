@@ -4,10 +4,8 @@ fixture('Login MAWM')
 .page('https://fsgis.sce.manh.com/udc/dm/facility-console');
 const args =minimist(process.argv.slice(2));
 const num =args.dynamicNum;
-// const num =45;
 test("LPN Level Asn Creation ", async (t) => {
 
-  try{
   //Item creation
    const itemId = await createItem(t);
    console.log("ItemId "+itemId);  
@@ -26,8 +24,6 @@ test("LPN Level Asn Creation ", async (t) => {
     const lpn =asnResponse[1];
     console.log("ASN "+asn);
     console.log("LPN "+lpn);
-
-  }catch(error){}
   
   });
 

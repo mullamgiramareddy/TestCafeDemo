@@ -7,10 +7,6 @@ const args =minimist(process.argv.slice(2));
 const num =args.env;
 
 test('1 Receiving', async t => {
-  
-    // const args =minimist(process.argv.slice(2));
-    // const num =args.env;
-    console.count(num)
     await t.typeText(Selector('#login-username'), 'macysdev-adminuser') 
     .pressKey('enter')
     .typeText(Selector('#login-password'), 'L1Admin2024$')
@@ -27,7 +23,6 @@ test('1 Receiving', async t => {
 
 
 test('2 Sorting Test', async t => {
-    console.log(process.argv.numb)
     await t.typeText(Selector('#login-username'), 'macysdev-adminuser') 
     .pressKey('enter')
     .typeText(Selector('#login-password'), 'L1Admin2024$')
@@ -45,7 +40,6 @@ test('2 Sorting Test', async t => {
 
 
 test('3 Putaway Test', async t => {
-    console.log(process.argv.numb)
     await t.typeText(Selector('#login-username'), 'macysdev-adminuser') 
     .pressKey('enter')
     .typeText(Selector('#login-password'), 'L1Admin2024$')
